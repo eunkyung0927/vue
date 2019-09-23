@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id = "simple">
-            <input id ="a" type = "text" v-model ="name" placeholder="이름을 입력하세요"/>
+            <input id ="a" type = "text" v-model.trim ="name" placeholder="이름을 입력하세요"/>
             <br/>
            입력된 이름:<h2 v-html="name"></h2>
         </div>
