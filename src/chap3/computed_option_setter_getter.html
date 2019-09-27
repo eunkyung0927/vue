@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>03-02</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="example">
+      금액 : <span>{{ amount }}원</span>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: "#example",
+        data: { amt: 1234567 },
+        computed: {
+          amount: {
+            //get : amt값인 숫자 세자리 마다 , 찍어 리턴
+            get: function() {
+              var s = new String("" + this.amt);
+              var result = "";
+              var num = 0;
+              for (var i = s.length - 1; i >= 0; i--) {
+                result = s[i] + result;
+                if (num % 3 == 2 && i !== 0) result = "," + result;
+                num++;
+              }
+              return result;
+            },
+            //set : 문자열받아 ,제거 후 숫자변환, amt속성에 할당
+            set: function(x) {
+              if (typeof x === "string") {
+                var result = parseInt(x.replace(/,/g, ""));
+                if (isNaN(result)) this.amt = 0;
+                else this.amt = result;
+              } else if (typeof x === "number") this.amt = x;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
